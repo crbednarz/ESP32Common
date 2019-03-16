@@ -1,1 +1,1 @@
-setup_headers_module("gsl" "gsl-lite/include")
+setup_headers_module(gsl-lite/include)

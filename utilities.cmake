@@ -1,4 +1,4 @@
-macro(setup_module name)
+macro(setup_module)
 	file(GLOB_RECURSE COMPONENT_SRCS
 		"public/*.c"
 		"public/*.h"
@@ -15,8 +15,12 @@ macro(setup_module name)
 endmacro()
 
 
-macro(setup_headers_module name header_path)
+macro(setup_headers_module header_path)
 	set(COMPONENT_ADD_INCLUDEDIRS ${header_path})
 
 	register_component()
+endmacro()
+
+macro(reference_module)
+	set(COMPONENT_REQUIRES ${ARGN})
 endmacro()

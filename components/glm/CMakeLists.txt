@@ -1,1 +1,1 @@
-setup_headers_module("glm" "glm")
+setup_headers_module(glm glm)
