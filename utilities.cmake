@@ -13,3 +13,10 @@ macro(setup_module name)
 
 	register_component()
 endmacro()
+
+
+macro(setup_headers_module name header_path)
+	set(COMPONENT_ADD_INCLUDEDIRS ${header_path})
+
+	register_component()
+endmacro()
