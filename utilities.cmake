@@ -10,14 +10,13 @@ macro(setup_module)
 		"private/*.cpp")
 
 	set(COMPONENT_ADD_INCLUDEDIRS "public" "private")
-
 	register_component()
+	component_compile_options(-std=c++11)
 endmacro()
 
 
 macro(setup_headers_module header_path)
 	set(COMPONENT_ADD_INCLUDEDIRS ${header_path})
-
 	register_component()
 endmacro()
 
