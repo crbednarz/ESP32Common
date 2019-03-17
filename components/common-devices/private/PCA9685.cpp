@@ -81,10 +81,10 @@ void PCA9685::setRange(uint8_t channel, float minDutyInMs, float maxDutyInMs)
 
 void PCA9685::setDuty(uint8_t channel, uint16_t on, uint16_t off)
 {
-	constexpr uint8_t LED0_ON_L = 0xFA;
-	constexpr uint8_t LED0_ON_H = 0xFB;
-	constexpr uint8_t LED0_OFF_L = 0xFC;
-	constexpr uint8_t LED0_OFF_H = 0xFD;
+	constexpr uint8_t LED0_ON_L = 0x06;
+	constexpr uint8_t LED0_ON_H = 0x07;
+	constexpr uint8_t LED0_OFF_L = 0x08;
+	constexpr uint8_t LED0_OFF_H = 0x09;
 	
 	uint8_t offset = channel * 4;
 
