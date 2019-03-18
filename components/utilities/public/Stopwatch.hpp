@@ -5,6 +5,9 @@
 #include <stdint.h>
 
 
+namespace esc {
+
+
 class Stopwatch
 {
 public:
@@ -31,7 +34,10 @@ private:
 };
 
 
-int Stopwatch::recordCount() const
+}
+
+
+int esc::Stopwatch::recordCount() const
 {
 	return _recordCount;
 }

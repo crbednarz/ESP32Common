@@ -4,6 +4,9 @@
 #include <stdint.h>
 
 
+namespace esc {
+
+
 class Task
 {
 public:
@@ -11,3 +14,6 @@ public:
 
 	static void sleep(uint32_t milliseconds);
 };
+
+
+}

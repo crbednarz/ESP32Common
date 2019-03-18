@@ -3,6 +3,9 @@
 #include <array>
 
 
+namespace esc {
+
+
 class PCA9685
 {
 public:
@@ -43,3 +46,6 @@ private:
 	std::array<Channel, 12> _channels;
 	float _dutyPerMs;
 };
+
+
+}

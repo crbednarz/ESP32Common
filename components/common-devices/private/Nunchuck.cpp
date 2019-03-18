@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-Nunchuck::Nunchuck() :
+esc::Nunchuck::Nunchuck() :
 	_device(0x52),
 	_nextUpdate(xTaskGetTickCount())
 {
@@ -11,7 +11,7 @@ Nunchuck::Nunchuck() :
 }
 
 
-void Nunchuck::connect()
+void esc::Nunchuck::connect()
 {
 	_device.write<uint8_t>(0xF0, 0x55);
 	Task::sleep(500);
@@ -19,7 +19,7 @@ void Nunchuck::connect()
 }
 
 
-void Nunchuck::poll()
+void esc::Nunchuck::poll()
 {
 	constexpr TickType_t MIN_POLL_DELAY = static_cast<TickType_t>(0.02f * configTICK_RATE_HZ);;
 	if (xTaskGetTickCount() < _nextUpdate)
@@ -35,7 +35,7 @@ void Nunchuck::poll()
 }
 
 
-glm::vec2 Nunchuck::joystick() const
+glm::vec2 esc::Nunchuck::joystick() const
 {
 	return _joystick;
 }

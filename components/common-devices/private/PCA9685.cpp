@@ -6,7 +6,7 @@
 #define PCA9685_ADDRESS 0x40
 
 
-PCA9685::PCA9685() :
+esc::PCA9685::PCA9685() :
 	_device(PCA9685_ADDRESS),
 	_isConnected(false),
 	_dutyPerMs(0.0f)
@@ -15,7 +15,7 @@ PCA9685::PCA9685() :
 }
 
 
-void PCA9685::connect()
+void esc::PCA9685::connect()
 {
 	if (isConnected())
 		return;
@@ -43,7 +43,7 @@ void PCA9685::connect()
 }
 
 
-void PCA9685::setFrequency(float frequencyInHz)
+void esc::PCA9685::setFrequency(float frequencyInHz)
 {
 	constexpr uint8_t MODE1 = 0x00;
 	constexpr uint8_t PRESCALE = 0xFE;
@@ -66,20 +66,20 @@ void PCA9685::setFrequency(float frequencyInHz)
 }
 
 
-void PCA9685::set(uint8_t channel, float delta)
+void esc::PCA9685::set(uint8_t channel, float delta)
 {
 	auto dutySizeInMs = _channels[channel].dutySize(delta);
 	setDuty(channel, 0, static_cast<uint16_t>(dutySizeInMs * _dutyPerMs));
 }
 
 
-void PCA9685::setRange(uint8_t channel, float minDutyInMs, float maxDutyInMs)
+void esc::PCA9685::setRange(uint8_t channel, float minDutyInMs, float maxDutyInMs)
 {
 	_channels[channel] = Channel(minDutyInMs, maxDutyInMs);
 }
 	
 
-void PCA9685::setDuty(uint8_t channel, uint16_t on, uint16_t off)
+void esc::PCA9685::setDuty(uint8_t channel, uint16_t on, uint16_t off)
 {
 	constexpr uint8_t LED0_ON_L = 0x06;
 	constexpr uint8_t LED0_ON_H = 0x07;
@@ -96,7 +96,7 @@ void PCA9685::setDuty(uint8_t channel, uint16_t on, uint16_t off)
 }
 
 
-void PCA9685::setDutyAll(uint16_t on, uint16_t off)
+void esc::PCA9685::setDutyAll(uint16_t on, uint16_t off)
 {
 	constexpr uint8_t ALL_LED_ON_L = 0xFA;
 	constexpr uint8_t ALL_LED_ON_H = 0xFB;
@@ -111,19 +111,19 @@ void PCA9685::setDutyAll(uint16_t on, uint16_t off)
 }
 
 
-bool PCA9685::isConnected() const
+bool esc::PCA9685::isConnected() const
 {
 	return _isConnected;
 }
 
 
-size_t PCA9685::channelCount() const
+size_t esc::PCA9685::channelCount() const
 {
 	return _channels.size();
 }
 
 
-PCA9685::Channel::Channel() :
+esc::PCA9685::Channel::Channel() :
 	_minDutyInMs(1.0f),
 	_maxDutyInMs(2.0f)
 {
@@ -131,7 +131,7 @@ PCA9685::Channel::Channel() :
 }
 
 
-PCA9685::Channel::Channel(float minDutyInMs, float maxDutyInMs) :
+esc::PCA9685::Channel::Channel(float minDutyInMs, float maxDutyInMs) :
 	_minDutyInMs(minDutyInMs),
 	_maxDutyInMs(maxDutyInMs)
 {
@@ -139,7 +139,7 @@ PCA9685::Channel::Channel(float minDutyInMs, float maxDutyInMs) :
 }
 
 
-float PCA9685::Channel::dutySize(float delta) const
+float esc::PCA9685::Channel::dutySize(float delta) const
 {
 	return (_maxDutyInMs - _minDutyInMs) * delta + _minDutyInMs;
 }

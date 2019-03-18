@@ -4,7 +4,7 @@
 #include "soc/i2c_reg.h"
 
 
-void I2CDevice::initialize()
+void esc::I2CDevice::initialize()
 {
 	i2c_config_t config;
 	config.mode = I2C_MODE_MASTER;
@@ -23,14 +23,14 @@ void I2CDevice::initialize()
 }
 
 
-I2CDevice::I2CDevice(uint8_t slaveAddress) : 
+esc::I2CDevice::I2CDevice(uint8_t slaveAddress) : 
 	_slaveAddress(slaveAddress)
 {
 
 }
 
 
-void I2CDevice::write(gsl::span<const uint8_t> data) const
+void esc::I2CDevice::write(gsl::span<const uint8_t> data) const
 {
 	// 'const' has been casted away on data for i2c_master_write which I can't imagine ever modifying the data.
 	// It may be worth investigating the source further.
@@ -43,7 +43,7 @@ void I2CDevice::write(gsl::span<const uint8_t> data) const
 	i2c_cmd_link_delete(cmd);
 }
 
-void I2CDevice::read(gsl::span<uint8_t> output) const
+void esc::I2CDevice::read(gsl::span<uint8_t> output) const
 {
 	i2c_cmd_handle_t cmd = i2c_cmd_link_create();
 	i2c_master_start(cmd);
@@ -57,7 +57,7 @@ void I2CDevice::read(gsl::span<uint8_t> output) const
 }
 
 
-void I2CDevice::write(gsl::span<const uint8_t> header, gsl::span<const uint8_t> data) const
+void esc::I2CDevice::write(gsl::span<const uint8_t> header, gsl::span<const uint8_t> data) const
 {
 	// 'const' has been casted away on data for i2c_master_write which I can't imagine ever modifying the data.
 	// It may be worth investigating the source further.
@@ -72,7 +72,7 @@ void I2CDevice::write(gsl::span<const uint8_t> header, gsl::span<const uint8_t> 
 }
 
 
-void I2CDevice::read(gsl::span<const uint8_t> header, gsl::span<uint8_t> output) const
+void esc::I2CDevice::read(gsl::span<const uint8_t> header, gsl::span<uint8_t> output) const
 {
 	write(header);
 	read(output);

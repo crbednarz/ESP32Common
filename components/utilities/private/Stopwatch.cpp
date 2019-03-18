@@ -2,7 +2,7 @@
 #include <assert.h>
 
 
-Stopwatch::Stopwatch() :
+esc::Stopwatch::Stopwatch() :
 	_totalElapsedTime(),
 	_lastStartTime(),
 	_recordCount(0),
@@ -12,7 +12,7 @@ Stopwatch::Stopwatch() :
 }
 
 
-void Stopwatch::start()
+void esc::Stopwatch::start()
 {
 	// Stopwatch must not be recording in order to call "Start"
 	assert(!_isRecording);
@@ -22,7 +22,7 @@ void Stopwatch::start()
 }
 
 
-void Stopwatch::stop()
+void esc::Stopwatch::stop()
 {
 	// Stopwatch must be recording in order to call "End"
 	assert(_isRecording);
@@ -35,7 +35,7 @@ void Stopwatch::stop()
 }
 
 
-void Stopwatch::reset()
+void esc::Stopwatch::reset()
 {
 	_isRecording = false;
 	_totalElapsedTime = Clock::duration();
@@ -43,7 +43,7 @@ void Stopwatch::reset()
 }
 
 
-float Stopwatch::averageTime() const
+float esc::Stopwatch::averageTime() const
 {
 	int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(_totalElapsedTime).count();
 	return milliseconds / ((float)_recordCount * 1000.0f);

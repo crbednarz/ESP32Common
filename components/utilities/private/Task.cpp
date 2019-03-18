@@ -3,7 +3,7 @@
 #include "freertos/task.h"
 
 
-void Task::sleep(uint32_t milliseconds)
+void esc::Task::sleep(uint32_t milliseconds)
 {
 	vTaskDelay(milliseconds / portTICK_RATE_MS);
 }

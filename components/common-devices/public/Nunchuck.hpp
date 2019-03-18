@@ -7,6 +7,9 @@
 #include "freertos/task.h"
 
 
+namespace esc {
+
+
 class Nunchuck
 {
 public:
@@ -24,3 +27,6 @@ private:
 	glm::vec2 _joystick;
 	TickType_t _nextUpdate;
 };
+
+
+}
