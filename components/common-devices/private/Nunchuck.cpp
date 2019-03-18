@@ -27,9 +27,8 @@ void Nunchuck::poll()
 
 	auto response = _device.read<std::array<uint8_t, 6>>();
 
-	_joystick = glm::vec2(
-		(response[0] - 10) / 236.0f,
-		(response[1] - 10) / 236.0f);
+	auto joystick = glm::vec2(response[0], response[1]) / 256.0f;
+	_joystick = (joystick - 0.1f) / 0.8f;
 
 	_nextUpdate = xTaskGetTickCount() + MIN_POLL_DELAY;
 	_device.write<uint8_t>(0);
