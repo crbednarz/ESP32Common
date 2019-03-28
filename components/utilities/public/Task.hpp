@@ -13,6 +13,8 @@ public:
 	Task() = delete;
 
 	static void sleep(uint32_t milliseconds);
+
+	static void wait(float milliseconds);
 };
 
 
