@@ -1,4 +1,4 @@
 
-reference_module(gsl)
+reference_module(gsl utilities)
 
 setup_module()
