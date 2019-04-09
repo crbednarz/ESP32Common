@@ -11,7 +11,7 @@ macro(setup_module)
 
 	set(COMPONENT_ADD_INCLUDEDIRS "public" "private")
 	register_component()
-	component_compile_options(-std=c++11)
+	component_compile_options(-std=gnu++14)
 endmacro()
 
 
