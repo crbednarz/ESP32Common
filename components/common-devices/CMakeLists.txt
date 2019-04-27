@@ -1,4 +1,4 @@
 
-reference_module(common-io utilities)
+reference_module(common-io graphics gsl utilities)
 
 setup_module()

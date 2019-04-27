@@ -1,6 +1,6 @@
 #pragma once
 #include "GpioPinState.hpp"
-#include <driver/gpio.h>
+#include "Platform.hpp"
 
 
 namespace esc {
@@ -9,14 +9,14 @@ namespace esc {
 class GpioPin
 {
 public:
-	GpioPin(gpio_num_t pin);
+	GpioPin(GpioNum pin);
 
 	void setState(GpioPinState state);
 
 	bool read() const;
 
 private:
-	gpio_num_t _pin;
+	GpioNum _pin;
 	GpioPinState _state;
 
 };
