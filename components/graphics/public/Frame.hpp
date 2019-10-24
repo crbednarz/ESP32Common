@@ -12,8 +12,8 @@ class Frame {
 public:
 	Frame() = default;
 
-	size_t width() const;
-	size_t height() const;
+	constexpr size_t width() const;
+	constexpr size_t height() const;
 
 	TColor& color(size_t x, size_t y);
 	const TColor& color(size_t x, size_t y) const;
@@ -31,14 +31,14 @@ private:
 
 
 template <typename TColor, size_t Width, size_t Height>
-size_t esc::Frame<TColor, Width, Height>::width() const
+constexpr size_t esc::Frame<TColor, Width, Height>::width() const
 {
 	return Width;
 }
 
 
 template <typename TColor, size_t Width, size_t Height>
-size_t esc::Frame<TColor, Width, Height>::height() const
+constexpr size_t esc::Frame<TColor, Width, Height>::height() const
 {
 	return Height;
 }

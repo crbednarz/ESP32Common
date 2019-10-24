@@ -158,6 +158,29 @@ void esc::ILI9341::connect()
 }
 
 
+void esc::ILI9341::present(gsl::span<const uint8_t> data)
+{
+	uint8_t caset[4] = { 
+		0, 
+		0, 
+		static_cast<uint8_t>((_width >> 8) & 0xFF),
+		static_cast<uint8_t>(_width & 0xFF)
+	};
+	uint8_t paset[4] = { 
+		0, 
+		0, 
+		static_cast<uint8_t>((_height >> 8) & 0xFF),
+		static_cast<uint8_t>(_height & 0xFF)
+	};
+	writeCommand(ILI9341_CASET);
+	writeData(gsl::span<const uint8_t>(caset, 4));
+	writeCommand(ILI9341_PASET);
+	writeData(gsl::span<const uint8_t>(paset, 4));
+	
+	writeCommand(ILI9341_RAMWR);
+	writeData(data);
+}
+
 
 void esc::ILI9341::setupPins()
 {
@@ -216,7 +239,7 @@ void esc::ILI9341::setupSpi()
 	spiBugConfig.sclk_io_num = DISPLAY_CLK;
 	spiBugConfig.quadwp_io_num = -1;
 	spiBugConfig.quadhd_io_num = -1;
-	spiBugConfig.max_transfer_sz = _width * _height * sizeof(ILI9341) + 8;
+	spiBugConfig.max_transfer_sz = _width * _height * sizeof(ILI9341Color) + 8;
 	
 	
 	spi_device_interface_config_t deviceInterfaceConfig = {};

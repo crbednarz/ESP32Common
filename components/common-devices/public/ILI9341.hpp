@@ -1,5 +1,7 @@
 #pragma once
 #include "gsl.hpp"
+#include "ILI9341Color.hpp"
+#include "Frame.hpp"
 #include <array>
 #include <driver/spi_master.h>
 
@@ -17,6 +19,11 @@ public:
 	void writeCommand(uint8_t command);
 	void writeData(uint8_t data);
 	void writeData(gsl::span<const uint8_t> data);
+
+	template <size_t Width, size_t Height>
+	void present(const Frame<ILI9341Color, Width, Height>& frame);
+
+	void present(gsl::span<const uint8_t> data);
 
 
 private:
@@ -39,4 +46,12 @@ private:
 };
 
 
+}
+
+
+
+template <size_t Width, size_t Height>
+void esc::ILI9341::present(const Frame<ILI9341Color, Width, Height>& frame)
+{
+	present(frame.rawData());
 }
