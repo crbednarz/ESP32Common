@@ -243,7 +243,7 @@ void esc::ILI9341::setupSpi()
 	
 	
 	spi_device_interface_config_t deviceInterfaceConfig = {};
-	deviceInterfaceConfig.clock_speed_hz = 10*1000*1000;
+	deviceInterfaceConfig.clock_speed_hz = 40*1000*1000;
 	deviceInterfaceConfig.mode = 0;
 	deviceInterfaceConfig.spics_io_num = DISPLAY_CS;
 	deviceInterfaceConfig.queue_size = 7;
