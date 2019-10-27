@@ -1,6 +1,5 @@
 #include "BME280.hpp"
 #include "Task.hpp"
-#include <iostream>
 
 
 esc::BME280::BME280() :
@@ -53,8 +52,6 @@ void esc::BME280::poll()
 	int32_t adc_H = 
 		(_device.read<uint8_t>(HUMIDITY_REGISTER + 0) << 8) |
 		(_device.read<uint8_t>(HUMIDITY_REGISTER + 1) << 0);
-
-	std::cout << "adc_T, adc_H " << adc_T << ", " << adc_H << std::endl;
 
 	// Taken from 4.2.3 in datasheet:
 	// https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf
