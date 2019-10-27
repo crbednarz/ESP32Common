@@ -4,3 +4,6 @@
 [submodule "components/gsl/gsl-lite"]
 	path = components/gsl/gsl-lite
 	url = https://github.com/martinmoene/gsl-lite.git
+[submodule "esp-aws-iot"]
+	path = esp-aws-iot
+	url = https://github.com/espressif/esp-aws-iot.git

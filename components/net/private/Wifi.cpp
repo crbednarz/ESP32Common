@@ -1,6 +1,7 @@
 #include "Wifi.hpp"
 #include "freertos/task.h"
 #include "esp_event.h"
+#include "esp_wifi.h"
 #include <iostream>
 #include <cstring>
 
@@ -8,10 +9,10 @@
 esc::Wifi::Wifi() :
 	_eventGroup(xEventGroupCreate())
 {
-	_config = WIFI_INIT_CONFIG_DEFAULT();
+	wifi_init_config_t config = WIFI_INIT_CONFIG_DEFAULT();
 	tcpip_adapter_init();
-	esp_wifi_init(&_config);
-	//esp_event_loop_create_default();
+	esp_event_loop_create_default();
+	esp_wifi_init(&config);
 
 	esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &globalEventHandler, this);
 	esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &globalEventHandler, this);
@@ -27,6 +28,7 @@ void esc::Wifi::connect(const std::string& ssid, const std::string& password)
 	esp_wifi_set_mode(WIFI_MODE_STA);
 	esp_wifi_set_config(ESP_IF_WIFI_STA, &config);
 	esp_wifi_start();
+	xEventGroupWaitBits(_eventGroup, BIT0, false, true, portMAX_DELAY);
 }
 
 

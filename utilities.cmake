@@ -23,13 +23,3 @@ endmacro()
 macro(reference_module)
 	set(COMPONENT_REQUIRES ${ARGN})
 endmacro()
-
-
-macro(register_project project_name)
-	if (ESP_PLATFORM)
-		include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-		set(EXTRA_COMPONENT_DIRS "${EXTRA_COMPONENT_DIRS} common/components")
-	endif()
-
-	project(${project_name})
-endmacro()

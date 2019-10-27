@@ -2,7 +2,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
 #include "esp_event.h"
-#include "esp_wifi.h"
 #include <string>
 
 
@@ -23,7 +22,6 @@ public:
 
 private:
 	EventGroupHandle_t _eventGroup;
-	wifi_init_config_t _config;
 
 	static void globalEventHandler(void* arg, esp_event_base_t eventBase, int32_t eventId, void* eventData);
 	void eventHandler(esp_event_base_t eventBase, int32_t eventId, void* eventData);
