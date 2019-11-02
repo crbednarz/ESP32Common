@@ -13,6 +13,7 @@ esc::Wifi::Wifi() :
 	tcpip_adapter_init();
 	esp_event_loop_create_default();
 	esp_wifi_init(&config);
+	esp_wifi_set_storage(WIFI_STORAGE_RAM);
 
 	esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &globalEventHandler, this);
 	esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &globalEventHandler, this);
@@ -29,6 +30,7 @@ void esc::Wifi::connect(const std::string& ssid, const std::string& password)
 	esp_wifi_set_config(ESP_IF_WIFI_STA, &config);
 	esp_wifi_start();
 	xEventGroupWaitBits(_eventGroup, BIT0, false, true, portMAX_DELAY);
+	std::cout << "Connection wait complete" << std::endl;
 }
 
 
@@ -43,6 +45,7 @@ void esc::Wifi::eventHandler(esp_event_base_t eventBase, int32_t eventId, void* 
 {
 	if (eventBase == WIFI_EVENT && eventId == WIFI_EVENT_STA_START) {
 		esp_wifi_connect();
+		std::cout << "Connection attempted..." << std::endl;
 	} else if (eventBase == WIFI_EVENT && eventId == WIFI_EVENT_STA_DISCONNECTED) {
 		esp_wifi_connect();
 		xEventGroupClearBits(_eventGroup, BIT0);
